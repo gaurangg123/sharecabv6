@@ -282,10 +282,8 @@ export default function MyBookings() {
                         <div className="flex flex-wrap gap-2">
                           {(booking.status === "upcoming" || booking.status === "active") && (
                             <>
-                              <Link href={`/track-ride?id=${booking.id}`}>
-                                <a className="flex-1 px-3 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition flex items-center justify-center text-sm">
-                                  <i className="ri-road-map-line mr-1"></i> Track
-                                </a>
+                              <Link href={`/track-ride?id=${booking.id}`} className="flex-1 px-3 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition flex items-center justify-center text-sm">
+                                <i className="ri-road-map-line mr-1"></i> Track
                               </Link>
                               <button className="flex-1 px-3 py-2 bg-destructive text-white rounded-lg hover:bg-opacity-90 transition flex items-center justify-center text-sm">
                                 <i className="ri-close-circle-line mr-1"></i> Cancel

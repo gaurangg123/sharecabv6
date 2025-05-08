@@ -290,12 +290,12 @@ export default function Profile() {
                                 <p className="font-medium">Default Search Radius</p>
                                 <p className="text-sm text-muted-foreground">Set the default radius for finding rides</p>
                               </div>
-                              <select className="p-2 border rounded-lg bg-background">
-                                <option>5 km</option>
-                                <option>10 km</option>
-                                <option selected>15 km</option>
-                                <option>25 km</option>
-                                <option>50 km</option>
+                              <select className="p-2 border rounded-lg bg-background" defaultValue="15 km">
+                                <option value="5 km">5 km</option>
+                                <option value="10 km">10 km</option>
+                                <option value="15 km">15 km</option>
+                                <option value="25 km">25 km</option>
+                                <option value="50 km">50 km</option>
                               </select>
                             </div>
                             <div className="flex items-center justify-between border-b pb-4">
@@ -361,9 +361,9 @@ export default function Profile() {
                                   )}
                                   <div>
                                     <p className="font-medium">
-                                      {method.type === "card" 
+                                      {method.type === "card" && method.brand
                                         ? `${method.brand.charAt(0).toUpperCase() + method.brand.slice(1)} •••• ${method.last4}` 
-                                        : `UPI - ${method.vpa}`}
+                                        : method.type === "upi" ? `UPI - ${method.vpa}` : "Payment Method"}
                                     </p>
                                     {method.type === "card" && (
                                       <p className="text-sm text-muted-foreground">

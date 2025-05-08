@@ -326,7 +326,7 @@ export default function BookRide() {
                               <span className="inline-flex items-center text-xs bg-muted px-2 py-1 rounded-full">
                                 <i className="ri-car-line mr-1"></i> {ride.vehicle}
                               </span>
-                              {ride.amenities.map((amenity, index) => (
+                              {ride.amenities.map((amenity: string, index: number) => (
                                 <span key={index} className="text-xs bg-muted px-2 py-1 rounded-full">
                                   {amenity}
                                 </span>
