@@ -10,9 +10,9 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="font-sans text-dark bg-white">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      <main className="pt-16">
+      <main className="flex-grow pt-16">
         <Hero />
         <Features />
         <Destinations />
