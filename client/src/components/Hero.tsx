@@ -5,21 +5,22 @@ export default function Hero() {
   const [formData, setFormData] = useState({
     departure: "",
     destination: "",
-    date: ""
+    date: "",
+    time: ""
   });
 
-  // Popular Indian cities for quick selection
-  const popularCities = [
-    { name: "Mumbai", isPopular: true },
-    { name: "Delhi", isPopular: true },
-    { name: "Bangalore", isPopular: true },
-    { name: "Hyderabad", isPopular: true },
-    { name: "Chennai", isPopular: true },
-    { name: "Kolkata", isPopular: false },
-    { name: "Pune", isPopular: false },
-    { name: "Ahmedabad", isPopular: false },
-    { name: "Jaipur", isPopular: false },
-    { name: "Lucknow", isPopular: false }
+  // Popular Indian city areas
+  const popularAreas = [
+    { name: "Indiranagar", isPopular: true },
+    { name: "MG Road", isPopular: true },
+    { name: "HSR Layout", isPopular: true },
+    { name: "Whitefield", isPopular: true },
+    { name: "Kormangala", isPopular: true },
+    { name: "Electronic City", isPopular: false },
+    { name: "Jayanagar", isPopular: false },
+    { name: "JP Nagar", isPopular: false },
+    { name: "Marathahalli", isPopular: false },
+    { name: "BTM Layout", isPopular: false }
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,8 +28,8 @@ export default function Hero() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleCityClick = (cityName: string, fieldName: "departure" | "destination") => {
-    setFormData({ ...formData, [fieldName]: cityName });
+  const handleAreaClick = (areaName: string, fieldName: "departure" | "destination") => {
+    setFormData({ ...formData, [fieldName]: areaName });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -46,15 +47,15 @@ export default function Hero() {
           {/* Hero Content */}
           <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-              India's Favorite <span className="text-primary">Ride-Sharing</span> Platform
+              Smart Urban <span className="text-primary">Commuting</span> Solution
             </h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-lg mx-auto md:mx-0">
-              Connect with travelers across India, split costs, reduce your carbon footprint, and make new connections on your journeys.
+              Book cabs instantly, share rides to save costs, and reduce traffic congestion and pollution in your city.
             </p>
 
             {/* Search Form */}
             <div className="bg-card p-6 rounded-2xl shadow-lg max-w-md mx-auto md:mx-0">
-              <h3 className="text-xl font-semibold mb-4">Find a ride</h3>
+              <h3 className="text-xl font-semibold mb-4">Book a ride now</h3>
               <form onSubmit={handleSubmit}>
                 <div className="space-y-4">
                   <div>
@@ -68,19 +69,19 @@ export default function Hero() {
                         value={formData.departure}
                         onChange={handleChange}
                         className="block w-full pl-10 pr-3 py-3 border rounded-lg bg-background" 
-                        placeholder="From" 
+                        placeholder="Pickup Location" 
                         required 
                       />
                     </div>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {popularCities.filter(city => city.isPopular).map((city, index) => (
+                      {popularAreas.filter(area => area.isPopular).map((area, index) => (
                         <button 
                           key={`from-${index}`}
                           type="button"
                           className="text-xs bg-muted hover:bg-primary hover:text-white px-2 py-1 rounded-full transition"
-                          onClick={() => handleCityClick(city.name, "departure")}
+                          onClick={() => handleAreaClick(area.name, "departure")}
                         >
-                          {city.name}
+                          {area.name}
                         </button>
                       ))}
                     </div>
@@ -97,44 +98,67 @@ export default function Hero() {
                         value={formData.destination}
                         onChange={handleChange}
                         className="block w-full pl-10 pr-3 py-3 border rounded-lg bg-background" 
-                        placeholder="To" 
+                        placeholder="Drop Location" 
                         required 
                       />
                     </div>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {popularCities.filter(city => city.isPopular).map((city, index) => (
+                      {popularAreas.filter(area => area.isPopular).map((area, index) => (
                         <button
                           key={`to-${index}`}
                           type="button"
                           className="text-xs bg-muted hover:bg-primary hover:text-white px-2 py-1 rounded-full transition"
-                          onClick={() => handleCityClick(city.name, "destination")}
+                          onClick={() => handleAreaClick(area.name, "destination")}
                         >
-                          {city.name}
+                          {area.name}
                         </button>
                       ))}
                     </div>
                   </div>
 
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      <i className="ri-calendar-line text-muted-foreground"></i>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i className="ri-calendar-line text-muted-foreground"></i>
+                      </div>
+                      <input 
+                        type="date" 
+                        name="date"
+                        value={formData.date}
+                        onChange={handleChange}
+                        className="block w-full pl-10 pr-3 py-3 border rounded-lg bg-background" 
+                        required 
+                      />
                     </div>
-                    <input 
-                      type="date" 
-                      name="date"
-                      value={formData.date}
-                      onChange={handleChange}
-                      className="block w-full pl-10 pr-3 py-3 border rounded-lg bg-background" 
-                      required 
-                    />
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i className="ri-time-line text-muted-foreground"></i>
+                      </div>
+                      <input 
+                        type="time" 
+                        name="time"
+                        value={formData.time}
+                        onChange={handleChange}
+                        className="block w-full pl-10 pr-3 py-3 border rounded-lg bg-background" 
+                        required 
+                      />
+                    </div>
                   </div>
 
-                  <button 
-                    type="submit" 
-                    className="w-full py-3 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition shadow-sm flex items-center justify-center"
-                  >
-                    <i className="ri-search-line mr-2"></i> Find Rides
-                  </button>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Link 
+                      href="/book-ride?type=solo" 
+                      className="py-3 bg-muted/70 hover:bg-muted text-foreground font-medium rounded-lg transition shadow-sm flex items-center justify-center"
+                    >
+                      <i className="ri-taxi-line mr-2"></i> Solo Ride
+                    </Link>
+                    <Link 
+                      href="/book-ride?type=carpool"
+                      className="py-3 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition shadow-sm flex items-center justify-center"
+                    >
+                      <i className="ri-group-line mr-2"></i> Car Pool
+                    </Link>
+                  </div>
                   
                   <div className="flex items-center justify-center text-sm text-muted-foreground mt-2">
                     <i className="ri-shield-check-line mr-1"></i> Safe, secure and verified drivers
@@ -147,8 +171,8 @@ export default function Hero() {
           {/* Hero Image */}
           <div className="md:w-1/2 relative">
             <img 
-              src="https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-              alt="Indian travelers sharing a ride" 
+              src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+              alt="Urban transportation in India" 
               className="w-full h-auto rounded-2xl shadow-xl"
             />
 
@@ -163,38 +187,15 @@ export default function Hero() {
                 <p className="text-muted-foreground">Daily Rides</p>
               </div>
               <div className="text-center">
-                <p className="text-3xl font-bold text-primary">100+</p>
-                <p className="text-muted-foreground">Indian Cities</p>
+                <p className="text-3xl font-bold text-primary">5M+</p>
+                <p className="text-muted-foreground">CO₂ Saved (kg)</p>
               </div>
             </div>
           </div>
         </div>
-        
-        {/* Popular routes banner */}
-        <div className="mt-20 text-center">
-          <p className="text-muted-foreground mb-4">Popular routes across India</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/book-ride" className="bg-card hover:bg-muted px-4 py-2 rounded-full text-sm flex items-center transition shadow-sm">
-              <span>Delhi - Chandigarh</span>
-              <span className="ml-2 bg-muted rounded-full text-xs px-2">₹800</span>
-            </Link>
-            <Link href="/book-ride" className="bg-card hover:bg-muted px-4 py-2 rounded-full text-sm flex items-center transition shadow-sm">
-              <span>Mumbai - Pune</span>
-              <span className="ml-2 bg-muted rounded-full text-xs px-2">₹600</span>
-            </Link>
-            <Link href="/book-ride" className="bg-card hover:bg-muted px-4 py-2 rounded-full text-sm flex items-center transition shadow-sm">
-              <span>Bangalore - Mysore</span>
-              <span className="ml-2 bg-muted rounded-full text-xs px-2">₹450</span>
-            </Link>
-            <Link href="/book-ride" className="bg-card hover:bg-muted px-4 py-2 rounded-full text-sm flex items-center transition shadow-sm">
-              <span>Chennai - Pondicherry</span>
-              <span className="ml-2 bg-muted rounded-full text-xs px-2">₹500</span>
-            </Link>
-          </div>
-        </div>
       </div>
 
-      {/* Custom Auto Animation (with Indian car model) */}
+      {/* Custom Car Animation */}
       <div className="car-animation w-full absolute bottom-0 left-0">
         <div className="car flex items-center">
           <i className="ri-taxi-line text-4xl text-primary"></i>
