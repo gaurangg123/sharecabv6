@@ -10,6 +10,7 @@ export default function Profile() {
     name: "Rahul Sharma",
     email: "rahul.sharma@example.com",
     phone: "+91 98765 43210",
+    gender: "male",
     address: "123 Main Street, Indiranagar, Bangalore 560038",
     profilePhoto: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200",
   });
@@ -46,6 +47,7 @@ export default function Profile() {
   // Security settings
   const [securitySettings, setSecuritySettings] = useState({
     twoFactorEnabled: false,
+    femaleOnlyVerified: false,
   });
   
   const handleToggleNotification = (key: keyof typeof notificationPrefs) => {
@@ -59,6 +61,13 @@ export default function Profile() {
     setSecuritySettings({
       ...securitySettings,
       twoFactorEnabled: !securitySettings.twoFactorEnabled,
+    });
+  };
+  
+  const handleToggleFemaleOnlyVerification = () => {
+    setSecuritySettings({
+      ...securitySettings,
+      femaleOnlyVerified: !securitySettings.femaleOnlyVerified,
     });
   };
   
@@ -216,6 +225,20 @@ export default function Profile() {
                                 value={profileData.phone}
                                 onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
                               />
+                            </div>
+                            <div>
+                              <label htmlFor="gender" className="block text-sm font-medium mb-2">Gender</label>
+                              <select
+                                id="gender"
+                                className="w-full p-3 border rounded-lg bg-background"
+                                value={profileData.gender}
+                                onChange={(e) => setProfileData({...profileData, gender: e.target.value})}
+                              >
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                              </select>
                             </div>
                             <div className="md:col-span-2">
                               <label htmlFor="address" className="block text-sm font-medium mb-2">Address</label>

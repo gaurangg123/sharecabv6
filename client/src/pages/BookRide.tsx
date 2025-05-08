@@ -196,11 +196,14 @@ export default function BookRide() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
+    const isCheckbox = (e.target as HTMLInputElement).type === 'checkbox';
+    const checked = isCheckbox ? (e.target as HTMLInputElement).checked : false;
+    
     setFormData(prev => {
       const updated = { 
         ...prev, 
-        [name]: type === 'checkbox' ? checked : value 
+        [name]: isCheckbox ? checked : value 
       };
       // In a real app, we would recalculate the fare when pickup/dropoff changes
       if (name === 'pickup' || name === 'dropoff') {
