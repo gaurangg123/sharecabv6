@@ -466,16 +466,37 @@ export default function BookRide() {
                               id="femaleOnly"
                               name="femaleOnly"
                               type="checkbox"
+                              checked={formData.femaleOnly}
+                              onChange={handleChange}
                               className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
                             />
                           </div>
-                          <div>
-                            <label htmlFor="femaleOnly" className="font-medium">Female passengers only</label>
+                          <div className="flex-1">
+                            <div className="flex justify-between items-center">
+                              <label htmlFor="femaleOnly" className="font-medium">Female passengers only</label>
+                              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                                Safety Feature
+                              </span>
+                            </div>
                             <p className="text-xs text-muted-foreground mt-0.5">
                               For safety, you'll need to verify your profile gender information
                             </p>
                           </div>
                         </div>
+                        {formData.femaleOnly && (
+                          <div className="rounded-lg bg-amber-50 dark:bg-amber-900/20 p-3 text-sm text-amber-700 dark:text-amber-300 flex items-start">
+                            <i className="ri-information-line text-amber-500 dark:text-amber-400 mr-2 text-lg"></i>
+                            <div>
+                              To use the female-only option, please verify your profile through the Profile &gt; Security page. This ensures a safe and secure ride-sharing experience for all female passengers.
+                              <button 
+                                onClick={() => window.location.href = '/profile'} 
+                                className="text-primary hover:underline block mt-1"
+                              >
+                                Go to verification page
+                              </button>
+                            </div>
+                          </div>
+                        )}
                       </>
                     )}
                     

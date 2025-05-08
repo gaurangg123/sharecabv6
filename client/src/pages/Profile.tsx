@@ -496,6 +496,50 @@ export default function Profile() {
                             )}
                           </div>
                           
+                          {profileData.gender === "female" && (
+                            <div className="border-b pb-4">
+                              <div className="flex justify-between items-center mb-4">
+                                <div>
+                                  <h3 className="text-lg font-medium">Female-Only Ride Verification</h3>
+                                  <p className="text-sm text-muted-foreground">
+                                    Verify your profile to use female-only ride option
+                                  </p>
+                                </div>
+                                <button
+                                  onClick={handleToggleFemaleOnlyVerification}
+                                  className={`relative inline-flex h-6 w-12 items-center rounded-full transition-colors focus:outline-none ${securitySettings.femaleOnlyVerified ? 'bg-primary' : 'bg-muted'}`}
+                                >
+                                  <span
+                                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                      securitySettings.femaleOnlyVerified ? 'translate-x-6' : 'translate-x-1'
+                                    }`}
+                                  ></span>
+                                </button>
+                              </div>
+                              {!securitySettings.femaleOnlyVerified && (
+                                <div className="bg-muted/50 p-3 rounded-lg text-sm">
+                                  <p className="mb-3">To verify your profile for female-only rides, please upload a government ID for verification.</p>
+                                  <div className="flex flex-wrap gap-3">
+                                    <button className="flex items-center px-3 py-2 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition">
+                                      <i className="ri-id-card-line mr-2"></i> Upload ID Card
+                                    </button>
+                                    <button className="flex items-center px-3 py-2 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition">
+                                      <i className="ri-passport-line mr-2"></i> Upload Passport
+                                    </button>
+                                  </div>
+                                </div>
+                              )}
+                              {securitySettings.femaleOnlyVerified && (
+                                <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg text-sm text-green-700 dark:text-green-300">
+                                  <div className="flex items-center">
+                                    <i className="ri-verified-badge-fill text-green-600 dark:text-green-400 mr-2 text-lg"></i>
+                                    Your profile is verified for female-only rides. You can now use this safety feature when booking.
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          
                           <div className="border-b pb-4">
                             <h3 className="text-lg font-medium mb-2">Login Sessions</h3>
                             <div className="space-y-4">
