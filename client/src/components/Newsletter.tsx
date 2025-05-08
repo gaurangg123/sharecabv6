@@ -18,12 +18,12 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="py-16 bg-light">
+    <section className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-lg mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-dark mb-4">Stay Updated</h2>
-          <p className="text-gray-600 mb-6">
-            Subscribe to our newsletter for travel tips, new routes, and exclusive promotions.
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Stay Updated</h2>
+          <p className="text-muted-foreground mb-6">
+            Subscribe to our newsletter for travel tips, new features, and exclusive promotions.
           </p>
           
           {isSubmitted ? (
@@ -34,7 +34,7 @@ export default function Newsletter() {
             <form className="flex flex-col sm:flex-row gap-3" onSubmit={handleSubmit}>
               <input 
                 type="email" 
-                className="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary" 
+                className="flex-grow px-4 py-3 rounded-lg border bg-background focus:ring-primary focus:border-primary" 
                 placeholder="Your email address" 
                 required
                 value={email}
@@ -49,7 +49,7 @@ export default function Newsletter() {
             </form>
           )}
           
-          <p className="text-gray-500 text-sm mt-4">
+          <p className="text-muted-foreground/80 text-sm mt-4">
             We respect your privacy. Unsubscribe at any time.
           </p>
         </div>

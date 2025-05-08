@@ -16,7 +16,8 @@ export default function BookRide() {
     dropoff: "",
     date: "",
     time: "",
-    passengers: "1"
+    passengers: "1",
+    femaleOnly: false
   });
 
   const [fare, setFare] = useState({
@@ -195,9 +196,12 @@ export default function BookRide() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => {
-      const updated = { ...prev, [name]: value };
+      const updated = { 
+        ...prev, 
+        [name]: type === 'checkbox' ? checked : value 
+      };
       // In a real app, we would recalculate the fare when pickup/dropoff changes
       if (name === 'pickup' || name === 'dropoff') {
         setTimeout(calculateFare, 500);
@@ -431,26 +435,45 @@ export default function BookRide() {
                     </div>
                     
                     {rideType === 'carpool' && (
-                      <div>
-                        <label htmlFor="passengers" className="block text-sm font-medium mb-2">Passengers</label>
-                        <div className="relative">
-                          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <i className="ri-user-line text-gray-400"></i>
+                      <>
+                        <div>
+                          <label htmlFor="passengers" className="block text-sm font-medium mb-2">Passengers</label>
+                          <div className="relative">
+                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                              <i className="ri-user-line text-gray-400"></i>
+                            </div>
+                            <select
+                              id="passengers"
+                              name="passengers"
+                              value={formData.passengers}
+                              onChange={handleChange}
+                              className="block w-full pl-10 pr-3 py-3 border rounded-lg bg-background"
+                              required
+                            >
+                              <option value="1">1 passenger</option>
+                              <option value="2">2 passengers</option>
+                              <option value="3">3 passengers</option>
+                            </select>
                           </div>
-                          <select
-                            id="passengers"
-                            name="passengers"
-                            value={formData.passengers}
-                            onChange={handleChange}
-                            className="block w-full pl-10 pr-3 py-3 border rounded-lg bg-background"
-                            required
-                          >
-                            <option value="1">1 passenger</option>
-                            <option value="2">2 passengers</option>
-                            <option value="3">3 passengers</option>
-                          </select>
                         </div>
-                      </div>
+                        
+                        <div className="flex items-center space-x-2 bg-card/50 p-3 rounded-lg border border-muted">
+                          <div className="flex items-center h-5">
+                            <input
+                              id="femaleOnly"
+                              name="femaleOnly"
+                              type="checkbox"
+                              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="femaleOnly" className="font-medium">Female passengers only</label>
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                              For safety, you'll need to verify your profile gender information
+                            </p>
+                          </div>
+                        </div>
+                      </>
                     )}
                     
                     {rideType === 'solo' && (
@@ -523,7 +546,8 @@ export default function BookRide() {
                             dropoff: "",
                             date: "",
                             time: "",
-                            passengers: "1"
+                            passengers: "1",
+                            femaleOnly: false
                           });
                           setHasSearched(false);
                         }}

@@ -36,26 +36,26 @@ export default function FAQ() {
   };
 
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-dark mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Everything you need to know about using ShareCab.
           </p>
         </div>
 
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq) => (
-            <div key={faq.id} className={`mb-6 border-b border-gray-200 pb-6 ${faq.id === faqs.length ? 'border-b-0' : ''}`}>
+            <div key={faq.id} className={`mb-6 border-b border-border pb-6 ${faq.id === faqs.length ? 'border-b-0' : ''}`}>
               <button 
                 className="flex justify-between items-center w-full text-left focus:outline-none"
                 onClick={() => toggleFaq(faq.id)}
               >
-                <h3 className="text-xl font-medium text-dark">{faq.question}</h3>
+                <h3 className="text-xl font-medium">{faq.question}</h3>
                 <i className={`ri-arrow-down-s-line text-2xl text-primary transition-transform ${openFaq === faq.id ? 'rotate-180' : ''}`}></i>
               </button>
-              <div className={`mt-3 text-gray-600 ${openFaq === faq.id ? 'block' : 'hidden'}`}>
+              <div className={`mt-3 text-muted-foreground ${openFaq === faq.id ? 'block' : 'hidden'}`}>
                 <p>{faq.answer}</p>
               </div>
             </div>
@@ -64,7 +64,7 @@ export default function FAQ() {
 
         {/* Additional Questions CTA */}
         <div className="text-center mt-12">
-          <p className="text-gray-600 mb-4">Still have questions? We're here to help.</p>
+          <p className="text-muted-foreground mb-4">Still have questions? We're here to help.</p>
           <a href="#" className="inline-block px-8 py-3 bg-primary text-white font-medium rounded-full hover:bg-opacity-90 transition shadow-sm">
             Contact Support
           </a>
